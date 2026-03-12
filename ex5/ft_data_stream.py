@@ -43,7 +43,7 @@ def is_prime(num: int) -> bool:
     return True
 
 
-def prime_gen(n: int):
+def prime_gen(n: int) -> Iterator[int]:
     """
     same for prime numbers, they go on to infinity, but yield always returns
     their number, and then resumes work again and again...

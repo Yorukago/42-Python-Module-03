@@ -1,4 +1,5 @@
 import math
+import sys
 
 """
 God i hated this one with a passion, so this is the "euclidian
@@ -28,9 +29,12 @@ def parse_coords(coord_str: str) -> tuple[int, int, int]:
     Remember to handle the classic "I typed 'abc' instead of
     '123'" error gracefully! - Said 42, the wise overlords
     """
-    parts = coord_str.split(",")
+    clean_str = coord_str.strip("() ")
+    parts = clean_str.split(",")
+
     if len(parts) != 3:
         raise ValueError("Coordinates must have exactly 3 values (x,y,z)")
+
     return tuple(int(p.strip()) for p in parts)
 
 
@@ -59,8 +63,20 @@ def main() -> None:
     except ValueError as e:
         print(f"Error parsing coordinates: {e}")
 
+    if len(sys.argv) > 1:
+        print(f"Processing Terminal Argument: {sys.argv[1]}")
+        try:
+            user_pos = parse_coords(sys.argv[1])
+            print(f"Parsed from argv: {user_pos}")
+            print(f"Distance from origin: {calculate_distance(origin,
+                  user_pos)}")
+        except ValueError as e:
+            print(f"Argv Error: {e}")
+    else:
+        print("No terminal arguments found. Try: python3 script.py 3,4,0")
+
     invalid_input = "abc,def,ghi"
-    print(f'Parsing invalid coordinates: "{invalid_input}"')
+    print(f'\nParsing invalid coordinates: "{invalid_input}"')
     try:
         parse_coords(invalid_input)
     except ValueError as e:
