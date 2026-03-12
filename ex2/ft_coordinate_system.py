@@ -27,7 +27,6 @@ def parse_coords(coord_str: str) -> tuple[int, int, int]:
     """
     Remember to handle the classic "I typed 'abc' instead of
     '123'" error gracefully! - Said 42, the wise overlords
-    (1)
     """
     parts = coord_str.split(",")
     if len(parts) != 3:
